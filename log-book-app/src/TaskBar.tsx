@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './TaskBar.css';
 import './localStorageUtils'
 import './NoteBox'
 import {saveNoteToLocal} from "./localStorageUtils";
-import getNoteData from "./NoteBox"
+import {getNoteData} from "./noteDataUtils";
 
 
 const TaskBar: React.FC = () => {
@@ -14,12 +14,13 @@ const TaskBar: React.FC = () => {
     const handleSave = () => {
         // Checker if title is not empty
         if (title.trim() !== '') {
-            const noteData = getNoteData;
+            const noteData = getNoteData()
             const note = {
                 title: title,
-                data: noteData.toString()
+                data: noteData
             };
             saveNoteToLocal(note);
+
         }
         else {
             alert ("Title cannot be empty!")
