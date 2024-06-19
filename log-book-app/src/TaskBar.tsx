@@ -4,6 +4,7 @@ import './localStorageUtils'
 import './NoteBox'
 import {saveNoteToLocal} from "./localStorageUtils";
 import {getNoteData} from "./noteDataUtils";
+import {Flip, toast} from "react-toastify";
 
 
 const TaskBar: React.FC = () => {
@@ -23,7 +24,19 @@ const TaskBar: React.FC = () => {
 
         }
         else {
-            alert ("Title cannot be empty!")
+
+            toast.error('Title cannot be empty!', {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Flip,
+            });
+
         }
     }
 
