@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import TaskBar from "./TaskBar"
@@ -8,14 +8,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const App: React.FC = () => {
-
+    const [noteState, changeNoteState] = useState('new')
     return (
         <div className = "App">
 
             <TaskBar/>
             <NoteBox/>
             <ToastContainer
-            limit={1}/>
+            limit={10}/>
 
         </div>
   );

@@ -5,7 +5,7 @@ interface Note {
     data: string;
 }
 export function saveNoteToLocal(note: Note): void {
-    localStorage.setItem(note.title, JSON.stringify(note));
+    localStorage.setItem("note_"+note.title, JSON.stringify(note));
 }
 
 

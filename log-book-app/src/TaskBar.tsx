@@ -14,18 +14,37 @@ const TaskBar: React.FC = () => {
 
     const handleSave = () => {
         // Checker if title is not empty
-        if (title.trim() !== '') {
+        const trimmedTitle = title.trim();
+        const existingTitle = localStorage.getItem("note_" + trimmedTitle)
+
+        if (trimmedTitle !== '' && !existingTitle) {
             const noteData = getNoteData()
             const note = {
-                title: title,
+                title: trimmedTitle,
                 data: noteData
             };
             saveNoteToLocal(note);
+            toast('Saved successfully!', {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Flip,
+            });
 
         }
         else {
+            let errorMessage = 'Unknown Error!'
+            if (trimmedTitle === '')
+                errorMessage = 'Title cannot be empty!'
+            else if (existingTitle)
+                errorMessage = 'File exists with same name!'
 
-            toast.error('Title cannot be empty!', {
+            toast.error(errorMessage, {
                 position: "top-center",
                 autoClose: 2500,
                 hideProgressBar: false,
