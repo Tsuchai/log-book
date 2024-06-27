@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './TaskBar.css';
-import './localStorageUtils'
-import './NoteBox'
-import {saveNoteToLocal} from "./localStorageUtils";
-import {getNoteData} from "./noteDataUtils";
+import '../NoteBox/localStorageUtils'
+import '../NoteBox/NoteBox'
+import {saveNoteToLocal} from "../NoteBox/localStorageUtils";
+import {getNoteData} from "../NoteBox/noteDataUtils";
 import {Flip, toast} from "react-toastify";
 
 
