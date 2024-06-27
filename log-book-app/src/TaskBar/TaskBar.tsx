@@ -73,6 +73,7 @@ const TaskBar: React.FC = () => {
                     placeholder="Title..."
                 />
             </div>
+
             <div className="taskbar-right">
                 <div className="icon">Settings</div>
                 <div className="icon" onClick={handleSave}>Save</div>
