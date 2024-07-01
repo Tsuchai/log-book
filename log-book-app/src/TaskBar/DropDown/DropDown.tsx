@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {Button, Popover, Typography} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import {Button, Popover, Typography, MenuItem} from '@mui/material';
 
 interface DropDownProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -12,6 +12,25 @@ interface DropDownProps {
 
 const DropDown: React.FC<DropDownProps> = ({ onClick, children, ariaDescribedBy, variant = 'contained'}) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [menuItems, setMenuItems] = useState<string[]>([]);
+
+    useEffect(() => {
+        const notes: string[] = [];
+        // Retrieval of items from localStorage
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && key.startsWith('note_')) {
+                let dots = ""
+                if(key.length > 30) {
+                    let dots = "..."
+                }
+                const noteTitle = key.substring(30) + dots
+                notes.push(noteTitle)
+            }
+            setMenuItems(notes);
+        }
+
+    })
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
@@ -47,7 +66,9 @@ const DropDown: React.FC<DropDownProps> = ({ onClick, children, ariaDescribedBy,
                 }}
             >
                 <Typography sx={{p: 2}}>DropDown Content</Typography>
-                //add menu item functionality (via ContentLogic file)
+                {menuItems.map((item, index) => (
+                    <MenuItem key={index} onClick={handleClose}>{item}</MenuItem>
+                ))}
 
 
             </Popover>
