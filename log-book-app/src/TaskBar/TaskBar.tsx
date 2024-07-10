@@ -6,17 +6,18 @@ import {saveNoteToLocal} from "../NoteBox/localStorageUtils";
 import {getNoteData} from "../NoteBox/noteDataUtils";
 import {Flip, toast} from "react-toastify";
 import DropDown from "./DropDown/DropDown";
-import {
-    Popover,
-    MenuItem,
-    Typography
-} from '@mui/material';
+import DropDownTitleElements from "./DropDown/DropDownTitleElements";
+
 
 
 const TaskBar: React.FC = () => {
     const [title, setTitle] = useState('');
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+
+    const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        console.log('Button clicked', e)
+    }
 
     const handleSave = () => {
         // Checker if title is not empty
@@ -72,12 +73,17 @@ const TaskBar: React.FC = () => {
                 <div className="icon">New Note</div>
             </div>
             <div className="taskbar-center">
+
                 <input
                     type="text"
                     value={title}
                     onChange={handleTitleChange}
                     placeholder="Title..."
                 />
+
+                <DropDownTitleElements></DropDownTitleElements>
+
+
             </div>
 
             <div className="taskbar-right">
