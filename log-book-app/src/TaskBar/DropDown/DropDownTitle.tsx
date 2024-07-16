@@ -18,28 +18,39 @@ import DropDownTitleElements from "./DropDownTitleElements";
 
 export default function DropDownTitle() {
     const [title, setTitle] = React.useState('');
+    const [notes, setNotes] = useState<string[]>([]);
+
+
+    useEffect(() => {
+        // Fetch notes when the component mounts
+        const fetchNotes = () => {
+            const fetchedNotes = fetchNoteTitles();
+            setNotes(fetchedNotes);
+        };
+        fetchNotes();
+    }, []);
 
     const handleChange = (event: SelectChangeEvent) => {
-        setTitle(event.target.value as string);
+        const selectedNote = event.target.value as string;
+        setTitle(selectedNote);
     };
 
-    let notes = fetchNoteTitles()
+
 
 
     return (
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Title</InputLabel>
             <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
                 value={title}
-                onChange={handleChange}
                 label="Title"
+                onChange={handleChange}
             >
-                <DropDownTitleElements></DropDownTitleElements>
+                <DropDownTitleElements notes={notes}></DropDownTitleElements>
             </Select>
         </FormControl>
-
     );
 
 

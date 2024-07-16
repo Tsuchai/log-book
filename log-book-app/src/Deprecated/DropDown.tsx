@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Popover, Typography, MenuItem} from '@mui/material';
-import { fetchNoteTitles } from "./contentDropDownLogic";
+import { fetchNoteTitles } from "../TaskBar/DropDown/contentDropDownLogic";
 
 interface DropDownProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;

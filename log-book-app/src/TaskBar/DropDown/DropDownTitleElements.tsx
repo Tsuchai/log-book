@@ -4,18 +4,25 @@ import {fetchNoteTitles} from "./contentDropDownLogic";
 import {Select} from "@mui/material";
 
 
-const DropDownTitleElements = () => {
-    const notes = fetchNoteTitles()
-    console.log(notes)
+interface DropDownTitleElementsProps {
+    notes: string[];
 
+}
+
+const DropDownTitleElements:React.FC<DropDownTitleElementsProps> = ({notes}) => {
+    const handleMenuItemClick = (noteTitle: string) => {
+
+    }
+
+    console.log(notes)
     return (
-        <Select>
+        <>
             {notes.map((note, index) => (
                 <MenuItem key={index} value={note}>
                     {note}
                 </MenuItem>
             ))}
-        </Select>
+        </>
     );
 };
 
