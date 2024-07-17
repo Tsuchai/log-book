@@ -21,14 +21,14 @@ export default function DropDownTitle() {
     const [notes, setNotes] = useState<string[]>([]);
 
 
-    useEffect(() => {
-        // Fetch notes when the component mounts
-        const fetchNotes = () => {
-            const fetchedNotes = fetchNoteTitles();
-            setNotes(fetchedNotes);
-        };
-        fetchNotes();
+    React.useEffect(() => {
+        const fetchedNotes = fetchNoteTitles();
+        setNotes(fetchedNotes);
     }, []);
+
+    const handleNoteSelect = (selectedNoteTitle: string) => {
+        setTitle(selectedNoteTitle); // Update the selected note title
+    };
 
     const handleChange = (event: SelectChangeEvent) => {
         const selectedNote = event.target.value as string;
@@ -48,7 +48,7 @@ export default function DropDownTitle() {
                 label="Title"
                 onChange={handleChange}
             >
-                <DropDownTitleElements notes={notes}></DropDownTitleElements>
+                <DropDownTitleElements notes={notes} onNoteSelect={handleNoteSelect}></DropDownTitleElements>
             </Select>
         </FormControl>
     );

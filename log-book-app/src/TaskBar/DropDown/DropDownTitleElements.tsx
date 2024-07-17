@@ -6,14 +6,13 @@ import {Select} from "@mui/material";
 
 interface DropDownTitleElementsProps {
     notes: string[];
-
+    onNoteSelect: (noteTitle: string) => void;
 }
 
-const DropDownTitleElements:React.FC<DropDownTitleElementsProps> = ({notes}) => {
+const DropDownTitleElements:React.FC<DropDownTitleElementsProps> = ({notes, onNoteSelect}) => {
     const handleMenuItemClick = (noteTitle: string) => {
-
-    }
-
+        onNoteSelect(noteTitle);
+    };
     console.log(notes)
     return (
         <>
