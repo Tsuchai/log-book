@@ -23,16 +23,16 @@ export default function DropDown() {
 
     React.useEffect(() => {
         const fetchedNotes = fetchNoteTitles();
+        fetchedNotes.sort((a, b) => a.localeCompare(b));
         setNotes(fetchedNotes);
     }, []);
 
-    const handleNoteSelect = (selectedNoteTitle: string) => {
-        setTitle(selectedNoteTitle); // Update the selected note title
-    };
 
     const handleChange = (event: SelectChangeEvent) => {
         const selectedNote = event.target.value as string;
+
         setTitle(selectedNote);
+        console.log()
     };
 
 
