@@ -8,15 +8,15 @@ import {
     Box,
     FormControl,
     InputLabel,
-    Select
+    Select, Menu
 } from '@mui/material';
 import { fetchNoteTitles } from "./contentDropDownLogic";
-import DropDownTitleElements from "./DropDownTitleElements";
 
 
 
 
-export default function DropDownTitle() {
+
+export default function DropDown() {
     const [title, setTitle] = React.useState('');
     const [notes, setNotes] = useState<string[]>([]);
 
@@ -48,7 +48,12 @@ export default function DropDownTitle() {
                 label="Title"
                 onChange={handleChange}
             >
-                <DropDownTitleElements notes={notes} onNoteSelect={handleNoteSelect}></DropDownTitleElements>
+                {notes.map((note, index) => (
+                    <MenuItem key={index} value={note}>
+                        {note}
+                    </MenuItem>
+                ))}
+
             </Select>
         </FormControl>
     );
