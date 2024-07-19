@@ -5,9 +5,9 @@ import '../NoteBox/NoteBox'
 import {saveNoteToLocal} from "../NoteBox/localStorageUtils";
 import {getNoteData} from "../NoteBox/noteDataUtils";
 import {Flip, toast} from "react-toastify";
-import DropDown from "../Deprecated/DropDown";
-import DropDownTitleElements from "./DropDown/DropDownTitleElements";
-import DropDownTitle from './DropDown/DropDownTitle';
+import DropDown from "./DropDown/DropDown";
+
+
 
 
 
@@ -75,17 +75,7 @@ const TaskBar: React.FC = () => {
             </div>
             <div className="taskbar-center">
 
-                {/*
-                <input
-                    type="text"
-                    value={title}
-                    onChange={handleTitleChange}
-                    placeholder="Title..."
-                />
-                */}
-
-
-                <DropDownTitle></DropDownTitle>
+                <DropDown></DropDown>
 
 
             </div>
