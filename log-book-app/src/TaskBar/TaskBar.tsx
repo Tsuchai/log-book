@@ -6,9 +6,7 @@ import {saveNoteToLocal} from "../NoteBox/localStorageUtils";
 import {getNoteData} from "../NoteBox/noteDataUtils";
 import {Flip, toast} from "react-toastify";
 import DropDown from "./DropDown/DropDown";
-
-
-
+import AboutLogBook from "./AboutLogBook";
 
 
 const TaskBar: React.FC = () => {
@@ -70,10 +68,20 @@ const TaskBar: React.FC = () => {
     return (
         <div className="taskbar">
             <div className="taskbar-left">
-                <div className="icon">Log Book</div>
+                <div><AboutLogBook></AboutLogBook></div>
                 <div className="icon">New Note</div>
             </div>
             <div className="taskbar-center">
+
+                {/*
+                <input
+                    type="text"
+                    value={title}
+                    onChange={handleTitleChange}
+                    placeholder="Title..."
+                />
+                */}
+
 
                 <DropDown></DropDown>
 
