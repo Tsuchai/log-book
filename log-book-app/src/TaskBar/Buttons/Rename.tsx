@@ -5,38 +5,18 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import './ButtonStyle.css';
+import TitleInput from "./TitleInput";
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
-const buttonStyle = {
-    backgroundColor: '#444',
-    padding: '10px',
-    margin: '0 5px',
-    cursor: 'pointer',
-    borderRadius: '5px',
-    '&:hover': {
-        backgroundColor: '#555',
-    },
-};
-
-export default function AboutLogBook() {
+export default function Rename() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     return (
         <div>
-            <Button sx={buttonStyle} onClick={handleOpen}>About LogBook</Button>
+            <Button className="button" onClick={handleOpen}>Rename...</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -51,12 +31,12 @@ export default function AboutLogBook() {
                 }}
             >
                 <Fade in={open}>
-                    <Box sx={style}>
+                    <Box className="modal">
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            What is LogBook?
+                            Rename...
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            LogBook is a notes app that is designed to emulate the Zettlekasten method in a simple interface.
+                            <TitleInput></TitleInput>
                         </Typography>
                     </Box>
                 </Fade>

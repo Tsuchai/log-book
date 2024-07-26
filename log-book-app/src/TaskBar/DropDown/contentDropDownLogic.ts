@@ -5,9 +5,6 @@ export const fetchNoteTitles = (): string[] => {
         const key = localStorage.key(i);
         if (key && key.startsWith('note_')) {
             let noteTitle = key.substring(5); // Remove 'note_' prefix
-            if (noteTitle.length > 25) { // Adjust length if necessary
-                noteTitle = noteTitle.substring(0, 25) + "...";
-            }
             notes.push(noteTitle);
         }
     }

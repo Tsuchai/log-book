@@ -35,22 +35,28 @@ export default function DropDown() {
         console.log()
     };
 
+    const getShortenedTitle = (title: string) => {
+        return title.length > 25 ? title.substring(0, 25) + "..." : title;
+    };
+
 
 
 
     return (
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-label">Title</InputLabel>
+            <InputLabel id="demo-simple-select-label" sx={{ color: 'white' }}>Title</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={title}
                 label="Title"
                 onChange={handleChange}
+                sx={{ color: 'white', '.MuiOutlinedInput-notchedOutline': { borderColor: 'white' } }}
+
             >
                 {notes.map((note, index) => (
                     <MenuItem key={index} value={note}>
-                        {note}
+                        {getShortenedTitle(note)}
                     </MenuItem>
                 ))}
 
