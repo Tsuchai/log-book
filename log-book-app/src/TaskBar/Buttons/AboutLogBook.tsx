@@ -15,7 +15,9 @@ export default function AboutLogBook() {
 
     return (
         <div>
-            <Button className="button" onClick={handleOpen}>About LogBook</Button>
+            <Button
+
+                className="button" onClick={handleOpen}>About LogBook</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

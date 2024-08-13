@@ -74,16 +74,6 @@ const TaskBar: React.FC = () => {
             </div>
             <div className="taskbar-center">
 
-                {/*
-                <input
-                    type="text"
-                    value={title}
-                    onChange={handleTitleChange}
-                    placeholder="Title..."
-                />
-                */}
-
-
                 <DropDown></DropDown>
 
 
