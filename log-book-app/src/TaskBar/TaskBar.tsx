@@ -1,31 +1,33 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './TaskBar.css';
-import '../NoteBox/localStorageUtils'
-import '../NoteBox/NoteBox'
-import {saveNoteToLocal} from "../NoteBox/localStorageUtils";
-import {getNoteData} from "../NoteBox/noteDataUtils";
-import {Flip, toast} from "react-toastify";
+import { saveNoteToLocal } from "../NoteBox/localStorageUtils";
+import { getNoteData } from "../NoteBox/noteDataUtils";
+import { Flip, toast } from "react-toastify";
 import DropDown from "./DropDown/DropDown";
 import AboutLogBook from "./Buttons/AboutLogBook";
 import Rename from "./Buttons/Rename";
 
+interface TaskBarProps {
+    onNoteChange: (newNote: string) => void;
+}
 
-const TaskBar: React.FC = () => {
-    const [title, setTitle] = useState('');
+const TaskBar: React.FC<TaskBarProps> = ({ onNoteChange }) => {
+    const [title, setTitle] = useState<string>('');
 
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
+    const handleTitleChange = (newTitle: string) => {
+        setTitle(newTitle);
+    };
 
-    const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        console.log('Button clicked', e)
-    }
+    const handleContentChange = (newContent: string) => {
+        onNoteChange(newContent);
+    };
 
     const handleSave = () => {
-        // Checker if title is not empty
         const trimmedTitle = title.trim();
-        const existingTitle = localStorage.getItem("note_" + trimmedTitle)
+        const existingTitle = localStorage.getItem("note_" + trimmedTitle);
 
         if (trimmedTitle !== '' && !existingTitle) {
-            const noteData = getNoteData()
+            const noteData = getNoteData();
             const note = {
                 title: trimmedTitle,
                 data: noteData
@@ -42,14 +44,13 @@ const TaskBar: React.FC = () => {
                 theme: "light",
                 transition: Flip,
             });
-
-        }
-        else {
-            let errorMessage = 'Unknown Error!'
-            if (trimmedTitle === '')
-                errorMessage = 'Title cannot be empty!'
-            else if (existingTitle)
-                errorMessage = 'File exists with same name!'
+        } else {
+            let errorMessage = 'Unknown Error!';
+            if (trimmedTitle === '') {
+                errorMessage = 'Title cannot be empty!';
+            } else if (existingTitle) {
+                errorMessage = 'File exists with same name!';
+            }
 
             toast.error(errorMessage, {
                 position: "top-center",
@@ -62,23 +63,18 @@ const TaskBar: React.FC = () => {
                 theme: "light",
                 transition: Flip,
             });
-
         }
-    }
+    };
 
     return (
         <div className="taskbar">
             <div className="taskbar-left">
-                <div><AboutLogBook></AboutLogBook></div>
-                <div><Rename></Rename></div>
+                <div><AboutLogBook /></div>
+                <div><Rename /></div>
             </div>
             <div className="taskbar-center">
-
-                <DropDown></DropDown>
-
-
+                <DropDown onContentChange={handleContentChange} onTitleChange={handleTitleChange} />
             </div>
-
             <div className="taskbar-right">
                 <div className="icon">New Note</div>
                 <div className="icon" onClick={handleSave}>Save</div>

@@ -3,12 +3,15 @@ import './NoteBox.css'
 import { setNoteData } from './noteDataUtils'
 
 
-const NoteBox: React.FC = () =>  {
-    const [note, setNote] = useState<string>('');
+interface NoteBoxProps {
+    note: string;
+    onNoteChange: (newNote: string) => void;
+}
 
+const NoteBox: React.FC<NoteBoxProps> = ({note, onNoteChange}) =>  {
     const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newNote = e.target.value;
-        setNote(newNote);
+        onNoteChange(newNote);
         setNoteData(newNote);
     };
 

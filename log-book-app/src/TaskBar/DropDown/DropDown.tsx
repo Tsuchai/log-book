@@ -13,12 +13,18 @@ import {
 import { fetchNoteTitles } from "./contentDropDownLogic";
 
 
+interface DropDownProps {
+    onTitleChange: (newTitle: string) => void;
+    onContentChange: (newContent: string) => void;
+}
 
 
 
-export default function DropDown() {
-    const [title, setTitle] = React.useState('');
+const DropDown: React.FC<DropDownProps> = ({ onTitleChange, onContentChange }) => {
+    const [title, setTitle] = useState<string>('');
     const [notes, setNotes] = useState<string[]>([]);
+
+
 
 
     React.useEffect(() => {
@@ -27,13 +33,26 @@ export default function DropDown() {
         setNotes(fetchedNotes);
     }, []);
 
+    const fetchNoteContent = (title: string) => {
+        const key = `note_${title}`;
+        const note = JSON.parse(localStorage.getItem(key) || '{}');
+        return note.data || '';
+    }
+
 
     const handleChange = (event: SelectChangeEvent) => {
-        const selectedNote = event.target.value as string;
+        const selectedTitle = event.target.value as string;
+        const noteContent = fetchNoteContent(selectedTitle);
 
-        setTitle(selectedNote);
+
+        setTitle(selectedTitle);
+
+
+        onTitleChange(selectedTitle);
+        onContentChange(noteContent);
         console.log()
     };
+
 
     const getShortenedTitle = (title: string) => {
         return title.length > 25 ? title.substring(0, 25) + "..." : title;
@@ -62,7 +81,13 @@ export default function DropDown() {
 
             </Select>
         </FormControl>
+
+
+
+
     );
 
 
 }
+
+export default DropDown;
